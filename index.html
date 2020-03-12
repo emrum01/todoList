@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  <body>
+    <div id="app">
+
+        <form v-on:submit.prevent="addItem"> <!--addItemに渡される。リロードは防ぐ-->
+          <input type="text" v-model="newItem"> <!--フォームからデータオブジェクトに値渡し-->
+          <input type="submit" value="add"> <!--送信ボタンを押すとaddItemに渡される-->
+        </form>
+
+        <ul v-cloak>
+
+          <li v-for="(todo,index) in todos" :key="todos.id">
+            <template v-if="done[index]">done!</template>
+
+            <!--タスク完了ボタン-->
+            <button v-on:click.once="doneItem(index)" class="command">done</button>
+
+            <!--todoリスト本体-->
+            <span>
+              {{todo}}
+            </span>
+            <!--todo削除ボタン-->
+            <button v-on:click="deleteItem(index)" class="command">x</button>
+          </li>
+
+        </ul>
+
+        <template>done!{{count}}</template>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>
